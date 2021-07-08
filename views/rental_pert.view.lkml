@@ -46,6 +46,12 @@ view: rental_pert {
     sql: ${TABLE}.films_all ;;
   }
 
+  dimension: rental_pert {
+    type: number
+    sql: ${films_rental}/${films_all} ;;
+    value_format_name: percent_2
+  }
+
   set: detail {
     fields: [film_id, films_rental, films_all]
   }
