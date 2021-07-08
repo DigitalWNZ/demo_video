@@ -308,6 +308,7 @@ explore: rental {
 explore: payment {}
 explore: global_status {}
 explore: rental_pert {}
+explore: rent_length {}
 
 # explore: sales_by_film_category {}
 
