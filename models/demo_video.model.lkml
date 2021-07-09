@@ -307,7 +307,18 @@ explore: rental {
 
 explore: payment {}
 explore: global_status {}
-explore: rental_pert {}
+explore: rental_pert {
+  join: film_category {
+    type: left_outer
+    sql_on: ${rental_pert.film_id}=${film_category.film_id} ;;
+    relationship: one_to_one
+  }
+  join: category {
+    type: left_outer
+    sql_on: ${film_category.category_id}=${category.category_id} ;;
+    relationship: one_to_one
+  }
+}
 explore: rent_length {}
 
 # explore: sales_by_film_category {}

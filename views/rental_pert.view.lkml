@@ -12,6 +12,7 @@ view: rental_pert {
         FROM inventory
         JOIN rental on rental.inventory_id = inventory.inventory_id
         WHERE rental.return_date is NULL
+        and {% condition update_filter %} inventory.last_update {% endcondition %}
         GROUP BY 1
       ) as rented_inventory
       LEFT JOIN
@@ -29,6 +30,10 @@ view: rental_pert {
   measure: count {
     type: count
     drill_fields: [detail*]
+  }
+
+  filter: update_filter {
+    type: date_time
   }
 
   dimension: film_id {
@@ -49,6 +54,12 @@ view: rental_pert {
   dimension: rental_pert {
     type: number
     sql: ${films_rental}/${films_all} ;;
+    value_format_name: percent_2
+  }
+
+  measure: avg_rental_pert {
+    type: average
+    sql: ${rental_pert} ;;
     value_format_name: percent_2
   }
 

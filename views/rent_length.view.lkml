@@ -42,11 +42,12 @@ view: rent_length {
   dimension: rental_length {
     label: "rental length in hour"
     type: number
-    sql: timestampdiff(HOUR,${prev_date_raw},${rental_date_raw}) ;;
+    # sql: timestampdiff(HOUR,${prev_date_raw},${rental_date_raw}) ;;
+    sql: datediff(${rental_date_raw},${prev_date_raw}) ;;
   }
 
   measure: avg_length {
-    label: "Avg Rental length in hours"
+    label: "Avg Rental length in days"
     type: average
     sql: ${rental_length} ;;
     value_format_name: decimal_2
