@@ -59,12 +59,20 @@ view: payment {
     sql: ${TABLE}.staff_id ;;
   }
 
+  # dimension:tieer_payment{
+  #   type: tier
+  #   sql:  ;;
+  # }
+
   measure: sum_payment {
     type: sum
     sql: ${amount} ;;
     value_format_name: decimal_2
     # value_format: "$0.0"
   }
+
+
+
 
   measure: count {
     type: count

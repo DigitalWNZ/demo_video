@@ -260,7 +260,17 @@ explore: rental {
     sql_on: ${rental.customer_id} = ${customer.customer_id} ;;
     relationship: many_to_one
   }
+  join: payment_tier {
+    type: left_outer
+    sql_on: ${rental.customer_id}=${payment_tier.payment_customer_id} ;;
+    relationship: one_to_one
+  }
 
+  join: rental_interval {
+    type: left_outer
+    sql_on: ${rental.customer_id}=${rental_interval.customer_id} ;;
+    relationship: one_to_one
+  }
 
   join: staff {
     type: left_outer
@@ -273,7 +283,21 @@ explore: rental {
     sql_on: ${inventory.film_id} = ${film.film_id} ;;
     relationship: many_to_one
   }
-
+  join: film_category {
+    type: left_outer
+    sql_on: ${inventory.film_id}=${film_category.film_id} ;;
+    relationship: one_to_one
+  }
+  join: category {
+    type: left_outer
+    sql_on: ${film_category.category_id}=${category.category_id} ;;
+    relationship: one_to_one
+  }
+  join: rental_percentage {
+    type: left_outer
+    sql_on: ${inventory.film_id} = ${rental_percentage.film_id} ;;
+    relationship: one_to_one
+  }
   join: store {
     type: left_outer
     sql_on: ${inventory.store_id} = ${store.store_id} ;;
@@ -320,6 +344,22 @@ explore: rental_pert {
   }
 }
 explore: rent_length {}
+
+
+explore: rental_percentage {
+  join: film_category {
+    type: left_outer
+    sql_on: ${rental_percentage.film_id}=${film_category.film_id} ;;
+    relationship: one_to_one
+  }
+  join: category {
+    type: left_outer
+    sql_on: ${film_category.category_id}=${category.category_id} ;;
+    relationship: one_to_one
+  }
+}
+
+explore: rental_interval {}
 
 # explore: sales_by_film_category {}
 
