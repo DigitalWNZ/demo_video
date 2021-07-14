@@ -31,6 +31,7 @@ view: payment_tier {
     tiers: [0,50,100,150,200]
     sql: ${payment_sum_payment} ;;
     drill_fields: [detail*]
+    value_format: "$0.00"
   }
 
   set: detail {
